@@ -59,3 +59,54 @@ View(demo2)
 demo2 <- filter(demo, !age %in% c(42, 45, 60))
 View(demo2)
 ```
+
+#Select
+#select the variables age, marital status and gender
+```{r}
+demo2 <- select(demo, age, marital, gender)
+View(demo2)
+```
+#use colon to select a range of variables
+```{r}
+demo2 <- select(demo, income:carcat)
+View(demo2)
+```
+#select the third and the fifth variable
+```{r}
+demo2 <- select(demo, c(3, 5))
+View(demo2)
+```
+#select the variables from the second to the forth
+```{r}
+demo2 <- select(demo, 2:4)
+View(demo2)
+```
+#remove variables age and income
+```{r}
+demo2 <- select(demo, -age, -income)
+View(demo2)
+```
+#remove the sixth and the eighth variable
+```{r}
+demo2 <- select(demo, -6, -8)
+View(demo2)
+```
+#remove the first three variables
+```{r}
+demo2 <- select(demo, -1:3)
+View(demo2)
+```
+#select the variables that contain a certain string
+```{r}
+demo2 <- select(demo, contains("ret"))
+View(demo2)
+```
+#select the variables that start with the specified string
+```{r}
+demo2 <- select(demo, starts_with("in"))
+```
+#select the variables that end with the specified string
+```{r}
+demo2 <- select(demo, ends_with("cat"))
+View(demo2)
+```
