@@ -160,3 +160,120 @@ View(demo2)
 demo2 <- mutate(filter(demo, retired =="Yes"), across(c(1,3, 5), ~ ./1000, .names = "{col}_2"))
 View(demo2)
 ```
+
+#Arrange
+#sort by income in ascending order
+```{r}
+demo2 <- arrange(demo, income)
+View(demo2)
+```
+#sort by income in descending order
+```{r}
+demo2 <- arrange(demo, desc(income))
+View(demo2)
+```
+#sort by education level from A to Z
+```{r}
+demo2 <- arrange(demo, educ)
+View(demo2)
+```
+#sort by education level from Z to A
+```{r}
+demo2 <- arrange(demo, desc(educ))
+View(demo2)
+```
+#sort by income and education, in ascending order
+```{r}
+demo2 <- arrange(demo, income, educ)
+View(demo2)
+```
+#sort by education and income in ascending order
+```{r}
+demo2 <- arrange(demo, educ, income)
+View(demo2)
+```
+#sort by income in ascending order and by education in descending order
+```{r}
+demo2 <- arrange(demo, income, desc(educ))
+View(demo2)
+```
+
+#Summarise
+#compute the mean of income
+```{r}
+meaninc <- summarise(demo, avginc=mean(income, na.rm=TRUE))
+View(meaninc)
+typeof(meaninc)
+```
+#compute the standard deviation of income
+```{r}
+sdinc <- summarise(demo, sdincome=sd(income, na.rm = TRUE))
+View(sdinc)
+```
+#compute the sum of the income values
+```{r}
+suminc <- summarise(demo, suminc=sum(income, na.rm = TRUE))
+View(suminc)
+```
+#compute the median of the income
+```{r}
+medinc <- summarise(demo, medinc=median(income, na.rm = TRUE))
+View(medinc)
+```
+#find the maximum income
+```{r}
+maxinc <- summarise(demo, maxinc=max(income, na.rm = TRUE))
+View(maxinc)
+```
+#compute the variance of income
+```{r}
+varinc <- summarise(demo, varinc=var(income, na.rm = TRUE))
+View(varinc)
+```
+#the number of rows in the dataset
+```{r}
+summarise(demo, n())
+```
+#compute several statistics at once
+```{r}
+summarise(demo, avginc=mean(income, na.rm = TRUE), sdinc=sd(income, na.rm = TRUE), varinc=var(income, na.rm = TRUE))
+```
+#combine summarise with other functions, like filter
+#compute the average income, the standard deviation of the income, and the number of rows for the observations where the age is greater than 35
+```{r}
+summarise(filter(demo, age>35), avginc=mean(income, na.rm = TRUE), sdinc=sd(income, na.rm = TRUE), n())
+```
+#compute the average income, the standard deviation of the income and the number of rows for the male owners
+```{r}
+summarise(filter(demo, gender=='Male'), avginc=mean(income, na.rm = TRUE), sdinc=sd(income, na.rm = TRUE), n())
+```
+#compute the mean for the variables age and car price
+```{r}
+summarise(demo, across(c(1,5), mean))
+```
+#compute the mean for all numeric variables
+```{r}
+summarise(demo, across(where(is.numeric), mean))
+```
+#compute the mean for all the numeric variables but for the luxury car owners only
+```{r}
+summarise(filter(demo, carcat=='Luxury'), across(where(is.numeric), mean))
+```
+#compute the standard deviation for all the numeric variables but for the luxury car owners only
+```{r}
+summarise(filter(demo, carcat=='Luxury'), across(where(is.numeric), sd))
+```
+#comupte the mean for the variables that start with the letter "c"
+```{r}
+summarise(demo, across(starts_with("c"), mean))
+```
+#compute the mean for the numeric variables that start with the letter "c"
+```{r}
+summarise(demo, across(starts_with("c") & where(is.numeric), mean))
+```
+#extract the variables in a seprate data frame and use everything argument in the across function
+```{r}
+demo2 <- select(demo, age, income, carpr)
+View(demo2)
+summarise(demo2, across(everything(), mean))
+```
