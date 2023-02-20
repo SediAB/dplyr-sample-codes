@@ -277,3 +277,36 @@ demo2 <- select(demo, age, income, carpr)
 View(demo2)
 summarise(demo2, across(everything(), mean))
 ```
+
+# group by
+# group the demo data frame by the categories of the variable education
+```{r}
+demo2 <- group_by(demo, educ)
+View(demo2)
+```
+# compute the average income
+```{r}
+summarise(demo, avginc=mean(income))
+```
+# compute the standard deviation of the variable car price
+```{r}
+summarise(demo, sdcarpr=sd(carpr))
+```
+# select from the demo2 data the owners that are older than 40
+```{r}
+demo3 <- filter(demo2, age>40)
+View(demo3)
+```
+# compute the average income in the demo3 data frame
+```{r}
+summarise(demo3, avginc=mean(income))
+```
+# compute the means  of columns 1 and 4 with the across function
+```{r}
+summarise(demo2, across(c(1,4), mean))
+```
+# compute the means of all numeric variables for the luxury cars only
+```{r}
+summarise(filter(demo2, carcat == 'Luxury'), across(where(is.numeric), mean))
+```
+
