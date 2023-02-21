@@ -310,3 +310,25 @@ summarise(demo2, across(c(1,4), mean))
 summarise(filter(demo2, carcat == 'Luxury'), across(where(is.numeric), mean))
 ```
 
+# Count()
+# count the rows in the demo data frame
+```{r}
+count(demo)
+```
+# count the rows where the income is smaller than 100
+```{r}
+count(filter(demo, income < 100))
+```
+# count the number of rows for each education level
+```{r}
+count(demo, educ)
+```
+# count the number of owners in each combination of  the variables gender and retired
+```{r}
+count(demo, gender, retired)
+```
+# the add_count function adds a column (variable) containing the number of rows
+```{r}
+demo2 <- add_count(demo)
+View(demo2)
+```
