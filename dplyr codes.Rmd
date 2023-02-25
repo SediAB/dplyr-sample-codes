@@ -332,3 +332,38 @@ count(demo, gender, retired)
 demo2 <- add_count(demo)
 View(demo2)
 ```
+
+#tally()
+# compute the income sum
+```{r}
+tally(demo, income)
+```
+# compute the car prices sum
+```{r}
+tally(demo, carpr)
+```
+# add a variable containing the number of rows
+```{r}
+demo2 <- add_tally(demo)
+```
+# add a variable containing the sum of the incomes
+```{r}
+demo3 <- add_tally(demo, income)
+View(demo3)
+```
+
+# n_distinct()
+# extract the variable educ as a vector and compute the number of unique values in this vector
+```{r}
+educ <- demo$educ
+n_distinct(educ)
+```
+# extract the variable income as a vector and compute the number of unique values in this vector
+```{r}
+inc <- demo$income
+n_distinct(inc)
+```
+# if the argument of the n_distinct() function is a data frame the function returns the number of rows
+```{r}
+n_distinct(demo)
+```
