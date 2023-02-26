@@ -367,3 +367,47 @@ n_distinct(inc)
 ```{r}
 n_distinct(demo)
 ```
+
+# sample()
+# the sample_n() function extracts a number of rows, at random
+```{r}
+demo_s <- sample_n(demo, 100)
+View(demo_s)
+```
+# sampling with replacement
+```{r}
+demo_s <- sample_n(demo, 100, replace = TRUE)
+View(demo_s)
+```
+# when we do sampling with replacement, the number of extracted rows can be greater than the number of rows in the initial data frame
+# create a data frame with 5 rows and extract 100 rows with replacement
+```{r}
+id <- 1:5
+names <- c("Tom", "Mary", "Nicolas", "Diana", "Ellen")
+dat <- data_frame(id, names)
+View(dat)
+dat_s <- sample_n(dat, 100, replace = TRUE)
+View(dat_s)
+```
+# sample_frac() extracts a fraction of rows at random
+# extract 30% of rows
+```{r}
+demo_s2 <- sample_frac(demo, 0.3)
+View(demo_s)
+```
+# extract 30% of rows with replacement
+```{r}
+demo_s2 <- sample_frac(demo, 0.3, replace = TRUE)
+View(demo_s2)
+```
+# top_n()
+# extract the top 10 owners based on income
+```{r}
+demo2 <- top_n(demo, 10, income)
+View(demo2)
+```
+# extract the top 10 owners based on age
+```{r}
+demo2 <- top_n(demo, 10, age)
+View(demo2)
+```
