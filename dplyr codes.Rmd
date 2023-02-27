@@ -411,3 +411,36 @@ View(demo2)
 demo2 <- top_n(demo, 10, age)
 View(demo2)
 ```
+# bind()
+# create a data frame that contains the first 10 rows of demo
+```{r}
+demo1 <- demo[1:10,]
+View(demo1)
+```
+# create a data frame that contains the last 10 row od demo
+```{r}
+demo2 <- demo[501:510,]
+View(demo2)
+```
+# bind the two data frame with bind_row()
+```{r}
+demo_b <- bind_rows(demo1, demo2)
+View(demo_b)
+```
+# bind_cols()
+# create a data frame that contains the first 3 columns of demo
+```{r}
+demo1 <- demo[,1:3]
+View(demo1)
+```
+# create a data frame that contains the last 5 columns of demo
+```{r}
+demo2 <- demo[,4:8]
+View(demo2)
+```
+# bind the two data frames by columns
+```{r}
+demo_b <- bind_cols(demo1, demo2)
+View(demo_b)
+```
+
