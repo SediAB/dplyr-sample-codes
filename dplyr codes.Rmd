@@ -443,4 +443,39 @@ View(demo2)
 demo_b <- bind_cols(demo1, demo2)
 View(demo_b)
 ```
+# glimpse
+# the glimpse() function returns a summary of our data frame
+```{r}
+glimpse(demo)
+```
 
+# set operations
+# intersect
+```{r}
+x <- 1:10
+y <- c(2,4,6,9,11,15)
+intersect(x, y)
+```
+# create a data frame that contains the rows 1 to 30 of the demo data set
+```{r}
+demo1 <- demo[1:30,]
+View(demo1)
+```
+# create a data frame that contains rows 20 to 40
+```{r}
+demo2 <- demo[20:40,]
+View(demo2)
+```
+# intersect the data frames
+```{r}
+intersect(demo1, demo2)
+```
+# union
+```{r}
+x <- 1:10
+y <- c(2,4,6,9,11,15)
+union(x, y)
+```
+```{r}
+union(demo1, demo2)
+```
