@@ -479,3 +479,39 @@ union(x, y)
 ```{r}
 union(demo1, demo2)
 ```
+# setdiff()
+# get the elements that are found in x, but not in y
+```{r}
+x <- 1:10
+y <- c(2,4,6,9,11,15)
+setdiff(x, y)
+```
+# get the elements that are found in y, but not x
+```{r}
+setdiff(y, x)
+```
+# find uncommon data frame rows
+```{r}
+demo1 <- demo[1:30,]
+View(demo1)
+
+demo2 <- demo[20:40,]
+View(demo2)
+
+setdiff(demo1, demo2)
+setdiff(demo2, demo1)
+```
+# setequal()
+```{r}
+x <- 1:10
+y <- c(2,4,6,9,11,15)
+setequal(x, y)
+```
+```{r}
+w <- c(20, 30, 40)
+z <- c(20, 30, 40)
+setequal(w, z)
+```
+```{r}
+setequal(demo1, demo2)
+```
