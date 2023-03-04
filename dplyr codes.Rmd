@@ -559,4 +559,12 @@ demo %>% group_by(marital)  %>% filter(income > 40) %>% tally(income)
 # select the owners of standard cars and extract a sample of 50 owners at random
 demo2 <- demo %>% filter(carcat == "Standard") %>% sample_n(50)
 View(demo2)
+# select the owners of standard cars, retain the variables age, income, car price and car category, then extract a sample of 50 owners at random
+demo2 <- demo %>% filter(carcat == "Standard") %>% select(age, income, carpr, carcat) %>% sample_n(50)
+View(demo2)
+# select the owners of standard cars, retain the variables age, income, car price, and car category, then extract a sample of 50 owners at random, then get the top 5 of them by income
+demo2 <- demo %>% filter(carcat == "Standard") %>% select(age, income, carpr, carcat) %>% sample_n(50) %>% top_n(5, income)
+View(demo2)
+# select the owners of standard cars, retain the variables age, income, car price, and car category, then extract a sample of 50 owners at random, then get a glimpse of the new data frame demo2
+demo2 <- demo %>% filter(carcat == "Standard") %>% select(age, income, carpr, carcat) %>% sample_n(50) %>% glimpse
 ```
