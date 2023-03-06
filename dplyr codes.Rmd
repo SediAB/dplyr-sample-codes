@@ -568,3 +568,17 @@ View(demo2)
 # select the owners of standard cars, retain the variables age, income, car price, and car category, then extract a sample of 50 owners at random, then get a glimpse of the new data frame demo2
 demo2 <- demo %>% filter(carcat == "Standard") %>% select(age, income, carpr, carcat) %>% sample_n(50) %>% glimpse
 ```
+
+# joining data frames
+# inner_join()
+# inner join returns all rows from the first data frame where there are matching values in the second data frame, and all variables from both data frames
+```{r}
+cities <- read.csv("cities.csv")
+View(cities)
+buildings <- read.csv("buildings.csv")
+View(buildings)
+
+# inner join cities with building
+ij <- inner_join(cities, buildings)
+View(ij)
+```
