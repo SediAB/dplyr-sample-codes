@@ -582,3 +582,18 @@ View(buildings)
 ij <- inner_join(cities, buildings)
 View(ij)
 ```
+# semi_join()
+# this command returns all rows from the first data frame where there are matching values in the second data frame, keeping variables from the first data frame only
+```{r}
+sj <- semi_join(cities, buildings)
+View(sj)
+
+sj2 <- semi_join(buildings, cities)
+View(sj2)
+```
+# left_join()
+# this command returns all rows from the first data frame and all variables from both data frames
+```{r}
+lj <- left_join(cities, buildings)
+View(lj)
+```
