@@ -615,3 +615,65 @@ View(fj)
 fj2 <- full_join(buildings, cities)
 View(fj2)
 ```
+
+# dplyr and ggplot2
+# column chart
+```{r}
+require(ggplot2)
+# create a column chart that represents the average car price by car category
+demo %>% group_by(carcat) %>%
+  summarise(avgpr=mean(carpr, na.rm = TRUE)) %>%
+  ggplot(aes(x=carcat,y=avgpr))+
+  geom_col(fill="darkblue")
+
+# a column chart that displays the maximum car price by car category
+demo %>% group_by(carcat) %>%
+  summarise(maxpr=max(carpr, na.rm = TRUE)) %>%
+  ggplot(aes(x=carcat, y=maxpr))+
+  geom_col(fill="green")
+
+# a column chart that represents the average income by gender for the luxury car owners
+demo %>% group_by(gender) %>%
+  filter(carcat=="Luxury") %>%
+  summarise(avginc=mean(income, na.rm = TRUE)) %>%
+  ggplot(aes(x=gender, y=avginc))+
+  geom_col(fill="blue")
+```
+# mean plot chart
+```{r}
+# a mean  plot chart that displays the average income by educational level
+demo %>% group_by(educ) %>%
+  summarise(avginc=mean(income, na.rm = TRUE)) %>%
+  ggplot(aes(x=educ, y=avginc, group=1))+
+  geom_line(color="darkred")
+
+# a mean plot chart that displays the average car price by gender
+demo %>% group_by(gender) %>%
+  summarise(avgpr=mean(carpr, na.rm = TRUE)) %>%
+  ggplot(aes(x=gender, y=avgpr, group=1))+
+  geom_line(color="darkred")
+
+# a mean plot chart that represents the average car price by gender for the owners with the income greater than 70
+demo %>% group_by(gender) %>%
+  filter(income>70) %>%
+  summarise(avgpr=mean(carpr, na.rm = TRUE)) %>%
+  ggplot(aes(x=gender, y=avgpr, group=1))+
+  geom_line(color="darkred")
+
+# a mean plot chart that represents the average income by gender with a separate line for each marital status
+demo %>% group_by(gender, marital) %>%
+  summarise(avginc=mean(income, rm.na = TRUE)) %>%
+  ggplot(aes(x=gender, y=avginc, group=marital,
+             color=marital))+geom_line()
+
+# a mean plot chart that represents the average income by marital status with a separate line for each gender
+demo %>% group_by(marital, gender) %>%
+  summarise(avginc=mean(income, na.rm = TRUE)) %>%
+  ggplot(aes(x=marital, y=avginc, group=gender, color=gender))+geom_line()
+
+# average income by marital status, with a separate line for each gender, for economy car owners only
+demo %>% group_by(marital, gender) %>%
+  filter(carcat=="Economy") %>%
+  summarise(avginc=mean(income, na.rm = TRUE)) %>%
+  ggplot(aes(x=marital, y=avginc, group=gender, color=gender))+geom_line()
+```
