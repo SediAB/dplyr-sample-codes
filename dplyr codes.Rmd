@@ -597,3 +597,21 @@ View(sj2)
 lj <- left_join(cities, buildings)
 View(lj)
 ```
+# anti_join()
+# returns all rows from the first data frame where there are NOT matching values in the second data frame and retains the variables from the first data frame
+```{r}
+aj <- anti_join(cities, buildings)
+View(aj)
+
+aj2 <- anti_join(buildings, cities)
+View(aj2)
+```
+# full_join
+# returns all rows and variables from both data frames, where there are no matches, the NA values is returned
+```{r}
+fj <- full_join(cities, buildings)
+View(fj)
+
+fj2 <- full_join(buildings, cities)
+View(fj2)
+```
