@@ -677,3 +677,60 @@ demo %>% group_by(marital, gender) %>%
   summarise(avginc=mean(income, na.rm = TRUE)) %>%
   ggplot(aes(x=marital, y=avginc, group=gender, color=gender))+geom_line()
 ```
+# scatterplot
+```{r}
+mk <- read.csv("marketingdb.csv")
+View(mk)
+
+# a scatterplot that respresents the relationship between age and income by gender
+mk %>% ggplot(aes(x=age, y=income, color=gender))+
+  geom_point()
+
+# a scatterplot that represents the relationship between age and income by gender, for the Mastercard owners only
+mk %>% filter(card == "Mastercard") %>%
+  ggplot(aes(x=age, y=income, color=gender))+
+  geom_point()
+
+# a scatterplot that represents the relationship between age and income by gender, for the people with at least 20 years of education
+mk %>% filter(ed >= 20) %>%
+  ggplot(aes(x=age, y=income, color=gender))+
+  geom_point()
+```
+# histograms
+```{r}
+# histogram of the income by gender category using the demo dataset
+demo %>% 
+  ggplot(aes(x=income, fill=gender))+
+  geom_histogram()
+
+# histogram of income by gender category for the luxury car owners
+demo %>%
+  filter(carcat == "Luxury") %>%
+  ggplot(aes(x=income, fill=gender))+
+  geom_histogram()
+
+# histogram of income by gender category for the car prices lower than 50
+demo %>%
+  filter(carpr < 50) %>%
+  ggplot(aes(x=income, fill=gender))+
+  geom_histogram()
+```
+# boxplot
+```{r}
+# boxplot of income by gender category
+demo %>%
+  ggplot(aes(x=gender, y=income))+
+  geom_boxplot()
+
+# boxplot of income by gender category for the standard car owners
+demo %>%
+  filter(carcat == "Standard") %>%
+  ggplot(aes(x=gender, y=income))+
+  geom_boxplot()
+
+# boxplot of income by gender category for the owners aged between 35 and 50
+demo%>%
+  filter(age>=35 & age <=50) %>%
+  ggplot(aes(x=gender, y=income))+
+  geom_boxplot()
+```
