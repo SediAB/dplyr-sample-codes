@@ -734,3 +734,16 @@ demo%>%
   ggplot(aes(x=gender, y=income))+
   geom_boxplot()
 ```
+
+# perform the following operations using the data frame incomedata.csv
+```{r}
+inc <- read.csv("incomedata.csv")
+View(inc)
+# select the variables age category (agecat) and gender for the subjects who did not complete high school
+inc2 <- inc %>% filter(educ == "Did not complete high school") %>% select(agecat, gender)
+View(inc2)
+# select the variables age category and gender for the subjects who did not complete high school and have the income greater than 20
+inc2 <- inc %>% filter(educ == "Did not complete high school" & income > 20) %>% select(agecat, gender)
+View(inc2)
+
+```
