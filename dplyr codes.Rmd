@@ -759,4 +759,14 @@ View(inc2)
 # count the number of subjects in each education category
 inc2 <- inc %>% group_by(educ) %>% summarise(n())
 View(inc2)
+# select 150 subjects at random, with and without replacement
+inc2 <- sample_n(inc, 150, replace = TRUE)
+View(inc2)
+inc2 <- sample_n(inc, 150, replace = FALSE)
+View(inc2)
+# select 25% of the subjects at random, with and without replacement
+inc2 <- sample_frac(inc, 0.25, replace = TRUE)
+View(inc2)
+inc2 <- sample_frac(inc, 0.25, replace = FALSE)
+View(inc2)
 ```
