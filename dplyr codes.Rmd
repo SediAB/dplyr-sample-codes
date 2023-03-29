@@ -770,3 +770,26 @@ View(inc2)
 inc2 <- sample_frac(inc, 0.25, replace = FALSE)
 View(inc2)
 ```
+# perform the following operations using the data frame satisfaction.csv
+```{r}
+sat <- read.csv("satisfaction.csv")
+View(sat)
+# group the travelers by travelers by type, select the travelers aged over 35 and compute their average satisfaction
+sat2 <- sat %>% group_by(type) %>% filter(age > 35) %>% summarise(avgsat=mean(satisfaction, na.rm = TRUE))
+View(sat2)
+# group the travelers by importance of price (imprice), select the pleasure travelers aged under 50 and compute their average satisfaction
+sat2 <- sat %>% group_by(imprice) %>% filter(type == "Pleasure traveler", age < 50) %>% summarise(avgsat=mean(satisfaction, na.rm = TRUE))
+View(sat2)
+# extract 55 travelers at random, without replacement, select the business travelers and compute their average price importance 
+sat2 <- sat %>% sample_n(55, replace = FALSE) %>% filter(type=="Business traveler") %>% summarise(avgprim=mean(imprice, na.rm = TRUE))
+View(sat2)
+# count the number of pleasure and business travelers
+sat2 <- sat %>% group_by(type) %>% summarise(n())
+View(sat2)
+# select the top 20 travelers based on age
+sat2 <- top_n(sat, 20, age)
+View(sat2)
+# select travelers that have of satisfaction level greater than 2 and compute their average age and price importance
+sat2 <- sat %>% filter(satisfaction > 2) %>% summarise(avgage=mean(age, na.rm = TRUE), avgprim=mean(imprice, na.rm = TRUE))
+View(sat2)
+```
