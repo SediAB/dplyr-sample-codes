@@ -793,3 +793,41 @@ View(sat2)
 sat2 <- sat %>% filter(satisfaction > 2) %>% summarise(avgage=mean(age, na.rm = TRUE), avgprim=mean(imprice, na.rm = TRUE))
 View(sat2)
 ```
+
+# perform the following operations using the data frame vehicles.csv
+```{r}
+veh <- read.csv("vehicles.csv")
+View(veh)
+# select the automobiles with the horsepower greater than 120
+veh2 <- veh %>% filter(type == "Automobile" & horsepow > 120)
+View(veh2)
+# select the automobiles with the fuel capacity lower than 20, retaining only the following variables: price, engine size (engine), and width
+veh2 <- veh %>% filter(fuelcap < 20) %>% select(price, engine, width)
+View(veh2)
+# group the data frame by vehicle type, select the vehicles with the price greater than 30 and compute their average mpg
+veh2 <- veh %>% group_by(type) %>% filter(price > 30) %>% summarise(avgmpg=mean(mpg, na.rm = TRUE))
+View(veh2)
+# group the data frame by vehicle type, select the vehicles with the engine size greater than 2.5 and compute their average price
+veh2 <- veh %>% group_by(type) %>% filter(engine > 2.5) %>% summarise(avgpr=mean(price, na.rm = TRUE))
+View(veh2)
+# select the top 25 vehicles by horsepower and fuel capacity, respectively
+veh2 <- top_n(veh, 25, horsepow)
+View(veh2)
+veh2 <- top_n(veh, 25, fuelcap)
+View(veh2)
+# compute a new variable as a product of vehicle width and length
+veh2 <- veh %>% mutate(wnl=width*length)
+View(veh2)
+# compute the number of unique values in the variables engine size
+eng <- veh$engine
+n_distinct(eng)
+# compute the number of unique values in the variables mpg
+mpg <- veh$mpg
+n_distinct(mpg)
+# extract 30 vehicles at random and compute their average width
+veh2 <- veh %>% sample_n(30) %>% summarise(avgwid=mean(width, na.rm = TRUE))
+View(veh2)
+# extract 70% of the vehicles at random, without replacement, and compute the number of vehicles in each type
+veh2 <- veh %>% sample_frac(0.7, replace = FALSE) %>% group_by(type) %>% summarise(n())
+View(veh2)
+```
