@@ -831,3 +831,21 @@ View(veh2)
 veh2 <- veh %>% sample_frac(0.7, replace = FALSE) %>% group_by(type) %>% summarise(n())
 View(veh2)
 ```
+
+# perform the following operations using the data frame company.csv
+```{r}
+comp <- read.csv("company.csv")
+View(comp)
+# extract the male employees (gender=1) with a salary over 30000, retaining the variables education and job time only
+comp2 <- comp %>% filter(gender == 1, salary > 30000) %>% select(educ, jobtime)
+View(comp2)
+# group the data frame by gender, select the employees in the sales department (sales=3) and compute their average salary
+comp2 <- comp %>% group_by(gender) %>% filter(dept == 3) %>% summarise(avgsal=mean(salary, na.rm = TRUE))
+View(comp2)
+# select 50% of the employees at random, without replacement, group them by department and compute the average job time by department
+comp2 <- comp %>% sample_frac(0.5, replace = FALSE) %>% group_by(dept) %>% summarise(avgjt=mean(jobtime, na.rm = TRUE))
+View(comp2)
+# compute a new variable by adding the variables job time and previous experience
+comp2 <- comp %>% mutate(newvar=jobtime+prevexp)
+View(comp2)
+```
