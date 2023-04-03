@@ -848,4 +848,13 @@ View(comp2)
 # compute a new variable by adding the variables job time and previous experience
 comp2 <- comp %>% mutate(newvar=jobtime+prevexp)
 View(comp2)
+# select the top 10 employees by salary
+comp2 <- top_n(comp, 10, salary)
+View(comp2)
+# group the data frame by department and gender, then compute the average previous experience for each group
+comp2 <- comp %>% group_by(dept, gender) %>% summarise(avgexp=mean(prevexp, na.rm = TRUE))
+View(comp2)
+# count the number of employees in each department, by gender
+comp2 <- comp %>% group_by(dept, gender) %>% summarise(n())
+View(comp2)
 ```
