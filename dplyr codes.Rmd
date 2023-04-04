@@ -858,3 +858,36 @@ View(comp2)
 comp2 <- comp %>% group_by(dept, gender) %>% summarise(n())
 View(comp2)
 ```
+
+# perform the following operations using the data frame countries.csv
+```{r}
+con <- read.csv("countries.csv")
+View(con)
+# select the top 5 countries by population increase (popincr)
+con2 <- top_n(con, 5, popincr)
+View(con2)
+# select the countries with a GDP over 1500 and population density over 130 and compute their average urban population rate (urban)
+con2 <- con %>% filter(gdp > 1500, density > 130) %>% summarise(avgurb=mean(urban, na.rm = TRUE))
+View(con2)
+# select 45 countries at random, without replacement, and compute their average GDP
+con2 <- con %>% sample_n(45, replace = FALSE) %>% summarise(avggdp=mean(gdp, na.rm = TRUE))
+View(con2)
+# compute a new variable by averaging the variables female life expectancy and male life expectancy (flexp, mlexp)
+con2 <- con %>% mutate(flexp+mlexp/2)
+View(con2)
+# compute the number of distinct values in the variables literacy and infant mortality (infmort), respectively
+lit <- con$literacy
+n_distinct(lit)
+inf <- con$infmort
+n_distinct(inf)
+# select 50% of the countries at random, without replacement, and compute their average population density and population increase
+con2 <- con %>% sample_frac(0.5, replace = FALSE) %>% summarise(avgpdens=mean(density, na.rm = TRUE), avgpinc=mean(popincr, na.rm = TRUE))
+View(con2)
+# sort the countries by gdp and literacy, in ascending order
+con2 <- arrange(con, gdp, literacy)
+View(con2)
+# sort the countries by male life expectancy in ascending order and population increase, in descending order
+con2 <- arrange(con, mlexp, desc(popincr))
+View(con2)
+
+```
