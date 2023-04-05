@@ -891,3 +891,33 @@ con2 <- arrange(con, mlexp, desc(popincr))
 View(con2)
 
 ```
+# perform the following operations using the data frame bankloan.csv
+```{r}
+ban <- read.csv("bankloan.csv")
+View(ban)
+# group the customers by marital status, select the customers with the balance greater than 1000 and who have a housing loan (housing) then compute their average duration
+ban2 <- ban %>% group_by(marital) %>% 
+filter(balance > 1000, housing == "yes") %>% summarise(avgdur=mean(duration, na.rm = TRUE))
+View(ban2)
+# group the customers by education level and type of contact, select 60% of these customers at random, without replacement and then compute their average balance
+ban2 <- ban %>% group_by(education, contact) %>%
+sample_frac(0.6, replace = FALSE) %>%
+summarise(avgbal=mean(balance, na.rm = TRUE))
+View(ban2)
+# select the top 100 customers by balance
+ban2 <- top_n(ban, 100, balance)
+View(ban2)
+# count the customers in each combination of the variables default and loan
+ban2 <- ban %>% group_by(default, loan) %>% summarise(n())
+View(ban2)
+# group the customers by the variable default, select the customers with a duration greater than 100 and then compute their average age
+ban2 <- ban %>% group_by(default) %>% filter(duration > 100) %>% summarise(avgage=mean(age, na.rm = TRUE))
+View(ban2)
+# select 1000 customers at random, retain those who have a personal loan (loan) and compute their total balance
+ban2 <- ban %>% sample_n(1000, replace = FALSE) %>%
+filter(loan == "yes") %>% summarise(totbal<- sum(balance, na.rm = TRUE))
+View
+# sort the customers by balance in descending order and by age in ascending order
+ban2 <- arrange(ban, desc(balance), age)
+View(ban2)
+```
