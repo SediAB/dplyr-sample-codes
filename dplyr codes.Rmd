@@ -921,3 +921,33 @@ View
 ban2 <- arrange(ban, desc(balance), age)
 View(ban2)
 ```
+# perform the following operations using the data frame forestfires.csv
+```{r}
+forest <- read.csv("forestfires.csv")
+View(forest)
+# group the data frame by the variable fire (no/yes, 0/1), select the cases with the temperature over 20 and compute the average wind speed
+forest2 <- forest %>% group_by(fire) %>% filter(temp > 20) %>% summarise(winspd=mean(wind, na.rm = TRUE))
+View(forest2)
+# select the cases with the RH over 30 and compute the average temperature
+forest2 <- forest %>% filter(RH > 30) %>% summarise(avgtemp=mean(temp, na.rm = TRUE))
+View(forest2)
+# select 45% of the observations at random, without replacement, and compute the average RH
+forest2 <- forest %>% sample_frac(0.45, replace = FALSE) %>% summarise(avgrh=mean(RH, na.rm = TRUE))
+View(forest2)
+# select 300 observation at random, without replacement, then select the observation where the value of fire is 1 (yes), then compute the average temperature and the average RH
+forest2 <- forest %>% sample_n(300, replace = FALSE) %>% filter(fire == 1) %>% summarise(avgtemp=mean(temp, na.rm = TRUE), avgrh=mean(RH, na.rm = TRUE))
+View(forest2)
+# sort the observations by temperature, in descending order
+forest2 <- arrange(forest, desc(temp))
+View(forest2)
+# count the number of unique values in the variable RH
+vrh <- forest$RH
+n_distinct(vrh)
+# count the observations in each category of the variable fire
+forest2 <- forest %>% group_by(fire) %>% summarise(n())
+View(forest2)
+# select the observations where the variable rain is greater than zero and compute the average temperature for these observations
+forest2 <- forest %>% filter(rain > 0) %>% summarise(avgtemp=mean(temp, na.rm = TRUE))
+View(forest2)
+
+```
