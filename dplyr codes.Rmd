@@ -949,5 +949,46 @@ View(forest2)
 # select the observations where the variable rain is greater than zero and compute the average temperature for these observations
 forest2 <- forest %>% filter(rain > 0) %>% summarise(avgtemp=mean(temp, na.rm = TRUE))
 View(forest2)
+```
 
+# Using the data frames people1.csv and people2.csv, perform the following operations:
+```{r}
+pep1 <- read.csv("people1.csv")
+View(pep1)
+pep2 <- read.csv("people2.csv")
+View(pep2)
+# get the rows that can be found in both data frames
+ij <- inner_join(pep1, pep2)
+View(ij)
+# join the data frames (discarding the common rows)
+aj <- anti_join(pep1, pep2)
+View(aj)
+# get the rows that can be found in people1.csv, but not in people2.csv
+lj <- left_join(pep1, pep2)
+View(lj)
+# get the rows that can be found in people2.csv, but not in people1.csv
+rj <- right_join(pep1, pep2)
+View(rj)
+# verify whether the data frames are identical
+identical(lj, rj)
+# join the data frames car-owners.csv and car-models.csv using all the join types
+caro <- read.csv("car-owners.csv")
+View(caro)
+carm <- read.csv("car-models.csv")
+View(carm)
+# inner join
+ij <- inner_join(caro, carm)
+View(ij)
+# semi join
+sj <- semi_join(caro, carm)
+View(sj)
+# left join
+lj <- left_join(caro, carm)
+View(lj)
+# anti join
+aj <- anti_join(caro, carm)
+View(aj)
+# full join
+fj <- full_join(caro, carm)
+View(fj)
 ```
