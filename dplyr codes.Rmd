@@ -991,4 +991,68 @@ View(aj)
 # full join
 fj <- full_join(caro, carm)
 View(fj)
+# join the data frames actors.csv and movies.csv using all the join types
+act <- read.csv("actors.csv")
+View(act)
+mov <- read.csv("movies.csv")
+View(mov)
+ij <- inner_join(act, mov)
+View(ij)
+sj <- semi_join(act, mov)
+View(sj)
+lj <- left_join(act, mov)
+View(lj)
+aj <- anti_join(act, mov)
+View(aj)
+fj <- full_join(act, mov)
+View(fj)
+```
+
+# Using the bankloan.csv data frame, build a column chart that represents the average balance by housing loan category (housing) for the married customers
+```{r}
+ban <- read.csv("bankloan.csv")
+View(ban)
+library(ggplot2)
+ban %>% 
+  group_by(housing) %>% 
+  filter(marital == "married") %>%
+  summarise(avgblc=mean(balance, na.rm = TRUE)) %>%
+  ggplot(aes(x=housing,y=avgblc))+
+  geom_col(fill="darkblue")
+```
+
+# using company.csv data frame, build a column chart that represents the average salary by department, for the employees with the job time greater than or equal to 80
+```{r}
+comp <- read.csv("company.csv")
+View
+comp %>% 
+  group_by(dept) %>% 
+  filter(salary >= 80) %>%
+  summarise(avgsal=mean(salary, na.rm = TRUE)) %>%
+  ggplot(aes(x=dept, y=avgsal))+
+  geom_col(fill="green")
+```
+
+# using the satisfaction.csv data frame, build a column chart that represents the average satisfaction level by type of traveler, for the travelers that consider the price very important (imprice=3)
+```{r}
+sat <- read.csv("satisfaction.csv")
+View(sat)
+sat %>%
+  group_by(type) %>%
+  filter(imprice == 3) %>%
+  summarise(avgsat=mean(satisfaction, na.rm = TRUE)) %>%
+  ggplot(aes(x=type, y=avgsat))+
+  geom_col(fill="lightblue")
+```
+
+# using the bankloan.csv data frame, build a mean plot chart that represents the average duration by education level, for the customers who have a personal loan (loan)
+```{r}
+ban <- read.csv("bankloan.csv")
+View(ban)
+ban %>%
+  group_by(education) %>%
+  filter(loan == "yes") %>%
+  summarise(avgdur=mean(duration, na.rm = TRUE)) %>%
+  ggplot(aes(x=education, y=avgdur, group=1))+
+  geom_line(color="pink")
 ```
