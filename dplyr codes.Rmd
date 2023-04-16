@@ -7,6 +7,7 @@ output: html_document
 
 ```{r}
 require(dplyr)
+require(ggplot2)
 ```
 #load data
 ```{r}
@@ -1085,4 +1086,82 @@ veh %>%
 ```{r}
 con <- read.csv("countries.csv")
 View(con)
+con %>%
+  filter(popincr >= 1) %>%
+  ggplot(aes(x=mlexp, y=flexp, color="popincr"))+
+  geom_point()
+```
+
+# using the forestfire data frame.csv, build a scatterplot chart that represents the relationship between temperature and wind speed, for the observation where the RH is over 39
+```{r}
+forest <- read.csv("forestfires.csv")
+View(forest)
+forest %>%
+  filter(RH > 39) %>%
+  ggplot(aes(x=temp, y=wind, color=RH))+
+  geom_point()
+```
+
+# using the company.csv data frame, build a scatterplot chart that represents the relationship between job time and salary, for the female employees (gender=2)
+```{r}
+comp <- read.csv("company.csv")
+View(comp)
+comp %>%
+  filter(gender == 2) %>%
+  ggplot(aes(x=jobtime, y=salary, color=gender))+
+  geom_point()
+```
+
+# using bankloan data frame, build a histogram of balance by marital status
+```{r}
+ban <- read.csv("bankloan.csv")
+View(ban)
+ban %>%
+  ggplot(aes(balance, fill=marital))+
+  geom_histogram()
+```
+
+# using the forestfires.csv data frame, build a histogram of temperature by the categories of the variable fire (0/1, no/yes)
+```{r}
+forest <- read.csv("forestfires.csv")
+View(forest)
+forest %>%
+  ggplot(aes(temp, fill=fire))+
+  geom_histogram()
+```
+
+# using the vehicles.csv data frame, build a histogram of horsepower by vehicle type
+```{r}
+veh <- read.csv("vehicles.csv")
+View(veh)
+veh %>%
+  ggplot(aes(x=horsepow, fill=type))+
+  geom_histogram(binwidth = 30)
+```
+
+# using the bankloan.csv dataframe, build a boxplot chart of age by default categories (no/yes)
+```{r}
+ban <- read.csv("bankloan.csv")
+View(ban)
+ban %>%
+  ggplot(aes(x=age, y=default))+
+  geom_boxplot()
+```
+
+# using the satisfaction.csv data frame, build a boxplot chart of price importance (imprice) by traveler type
+```{r}
+sat <- read.csv("satisfaction.csv")
+View(sat)
+sat %>%
+  ggplot(aes(x=imprice, y=type))+
+  geom_boxplot()
+```
+
+# using the vehicles.csv data frame, build a boxplot chart of engine size by vehicle type
+```{r}
+veh <- read.csv("vehicles.csv")
+View(veh)
+veh %>%
+  ggplot(aes(x=engine, y=type))+
+  geom_boxplot()
 ```
