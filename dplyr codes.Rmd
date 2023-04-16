@@ -1056,3 +1056,33 @@ ban %>%
   ggplot(aes(x=education, y=avgdur, group=1))+
   geom_line(color="pink")
 ```
+
+# using the incomedata.csv data frame, build a mean plot chart that represents the average income by education level, for the following age categories: 31-44 and over 44.
+```{r}
+inc <- read.csv("incomedata.csv")
+View(inc)
+inc %>% 
+  group_by(educ) %>% 
+  filter(agecat %in% c("31-44", "Over 44")) %>%
+  summarise(avginc=mean(income, na.rm = TRUE)) %>%
+  ggplot(aes(x=educ, y=avginc, group=1))+
+  geom_line()
+```
+
+# using the vehicles.csv data frame, build a mean plot chart that represents the average mpg by type of vehicle, for the vehicles with a horse power of at least 150
+```{r}
+veh <- read.csv("vehicles.csv")
+View(veh)
+veh %>%
+  group_by(type) %>%
+  filter(horsepow >= 150) %>%
+  summarise(avgmpg=mean(mpg, na.rm = TRUE)) %>%
+  ggplot(aes(x=type, y=avgmpg, group=1))+
+  geom_line()
+```
+
+# using the countries.csv data frame, build a scatterplot chart that represents the relationship between the male life expectancy (mlexp) and female life expectancy (flexp), for the countries with a population increase greater than or equal to 1
+```{r}
+con <- read.csv("countries.csv")
+View(con)
+```
